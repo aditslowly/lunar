@@ -1,34 +1,48 @@
-# Compiler dan flags
+# Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -std=c++17
+CXXFLAGS = -Wall -Wextra -std=c++17
+LDFLAGS =
 
-# Direktori
-SRC = ui
-BUILD = build
+# Directories
+SRC_DIR = ui
+INC_DIR = include
+BUILD_DIR = build
+LOG_DIR = log
 
-# Target
-TARGET = $(BUILD)/lunar.exe
+# Source files
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
-# File sumber
-SOURCES = $(SRC)/main.cpp $(SRC)/install.cpp
-OBJECTS = $(patsubst $(SRC)/%.cpp,$(BUILD)/%.o,$(SOURCES))
+# Target executable
+TARGET = lunar.exe
 
-# Build
+# Default rule
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS) | $(BUILD)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+# Rule to build the target
+$(TARGET): $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(BUILD)/%.o: $(SRC)/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# Rule to build object files
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR) $(LOG_DIR)
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Buat folder build jika belum ada
-$(BUILD):
-	mkdir -p $(BUILD)
+# Create build directory if it doesn't exist
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
-# Clean up
+# Create log directory if it doesn't exist
+$(LOG_DIR):
+	mkdir -p $(LOG_DIR)
+
+# Clean build and log files
 clean:
-	rm -f $(BUILD)/*.o $(TARGET)
-	rm -rf $(BUILD)
+	rm -rf $(BUILD_DIR) $(TARGET)
+	rm -rf $(LOG_DIR)/*.log
 
-.PHONY: all clean
+# Clean logs only
+clean_logs:
+	rm -rf $(LOG_DIR)/*.log
+
+# Phony targets
+.PHONY: all clean clean_logs debug

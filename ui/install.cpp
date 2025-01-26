@@ -1,9 +1,29 @@
 #include <cstdlib>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <ios>
 #include <iostream>
 #include "install.hpp"
 #include <string>
 
 using namespace std;
+
+void writeLog(const string& message) {
+  ofstream logFile("log/install.log", ios::app);
+  if (logFile.is_open()) {
+    time_t now = time(nullptr);
+    char timestamp[20];
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", localtime(&now));
+
+    logFile << "[" << timestamp << "]" << message << endl;
+    logFile.close();
+  }
+  else {
+    cerr << "Failed to open log file!" << endl;
+  }
+}
+
 
 void downloadFile(const std::string& url, const std::string& output) {
     std::string command = "curl -L -o " + output + " " + url;
