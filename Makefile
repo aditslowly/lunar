@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -Wall -Wextra -std=c++17 -m64
 LDFLAGS =
 
 # Directories

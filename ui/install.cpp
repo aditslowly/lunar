@@ -37,7 +37,7 @@ void installProgram(const std::string& installerPath) {
 
 void installLaragon() {
   cout << "Installing Laragon...\n";
-  downloadFile("https://laragon.org/download/Laragon.exe", "Laragon.exe");
+  downloadFile("https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe", "laragon-wamp.exe");
   installProgram("Laragon.exe");
   cout << "Laragon installation complete!\n";
 }
@@ -56,7 +56,7 @@ void installVisualStudioCode() {
 
 void installPython() {
   cout << "Installing Python...\n";
-  system("winget install --id Python.Python.3.12 -e --source winget");
+  system("winget install --id Python.Python.3.13 -e --source winget");
   cout << "Python installation complete!\n";
 }
 

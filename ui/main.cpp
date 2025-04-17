@@ -20,7 +20,7 @@ void showMenu() {
     std::cout << "======================================" << std::endl;
     std::cout << "       Lunar Installation Menu: " << std::endl;
     std::cout << "======================================" << std::endl;
-    std::cout << "1. Install Laragon" << std::endl;
+    std::cout << "1. Install Laragon App" << std::endl;
     std::cout << "2. Install NodeJS" << std::endl;
     std::cout << "3. Install Visual Studio Code" << std::endl;
     std::cout << "4. Install Python" << std::endl;
