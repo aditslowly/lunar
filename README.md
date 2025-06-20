@@ -2,7 +2,7 @@ All in one web server and code editor for beginer web programmers, support windo
 
 ## INSTALL AND RUN IT
 ```bash
-git clone https://github.com/adityaw250/lunar.git
+git clone https://github.com/aditslowly/lunar.git
 cd lunar/build
 lunar.exe
 ```
